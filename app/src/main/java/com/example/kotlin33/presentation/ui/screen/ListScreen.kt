@@ -22,7 +22,7 @@ fun ListScreen(
     LazyColumn(
         contentPadding = PaddingValues(
             top = 40.dp, start = 0.dp,
-            end = 0.dp, bottom = 0.dp
+            end = 0.dp, bottom = 90.dp
         ),
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
