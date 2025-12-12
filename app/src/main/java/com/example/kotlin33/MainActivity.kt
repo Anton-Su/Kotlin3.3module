@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.kotlin33.presentation.navigation.Navigation
 import com.example.kotlin33.presentation.theme.Kotlin33Theme
 
 class MainActivity : ComponentActivity() {
@@ -20,10 +21,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             Kotlin33Theme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+//                    Greeting(
+//                        name = "Android",
+//                        modifier = Modifier.padding(innerPadding)
+//                    )
+                    Navigation()
                 }
             }
         }
