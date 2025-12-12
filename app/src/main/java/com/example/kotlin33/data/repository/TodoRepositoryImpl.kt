@@ -6,13 +6,20 @@ import com.example.kotlin33.domain.repository.TodoRepository
 
 
 class TodoRepositoryImpl(dataSource: TodoJsonDataSource) : TodoRepository {
-    private val todosDto = dataSource.getTodos()
+    private val todosDto = dataSource.getTodosFromJson().toMutableList()
 
     override suspend fun getTodos(): List<TodoItem> {
         return todosDto.map { it.toDomain() }
     }
 
     override suspend fun toggleTodo(id: Int): TodoItem? {
-        return todosDto.find { it.id == id }?.toDomain()
+        val index = todosDto.indexOfFirst { it.id == id }
+        if (index != -1) {
+            val old = todosDto[index]
+            val updated = old.copy(isCompleted = !old.isCompleted)
+            todosDto[index] = updated
+            return updated.toDomain()
+        }
+        return null
     }
 }
