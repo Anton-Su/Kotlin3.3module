@@ -41,6 +41,14 @@ android {
 }
 
 dependencies {
+
+    // Корутин тестовые библиотеки
+    testImplementation(libs.kotlinx.coroutines.test)
+
+    androidTestImplementation(libs.ui.test.junit4)
+    debugImplementation(libs.ui.test.manifest)
+
+    
     implementation(libs.gson)
 
     implementation (libs.androidx.lifecycle.viewmodel.ktx)
@@ -66,4 +74,5 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    testImplementation(kotlin("test"))
 }
