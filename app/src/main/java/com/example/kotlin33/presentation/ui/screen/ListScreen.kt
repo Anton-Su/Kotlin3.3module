@@ -18,7 +18,13 @@ fun ListScreen(
     navHostController: NavHostController,
     viewModel: TodoViewModel = viewModel()
 ) {
+
+    // Подписываемся на StateFlow
+    // StateFlow  →  MutableState  →  Compose
+    // делегирование by позволяет не писать постоянно .value (отрезает слой реактивности от слоя отображения).
+    // viewModel.todos возвращает StateFlow<List<TodoItem>>, а todos становится List<TodoItem>
     val todos by viewModel.todos.collectAsState()
+    //todos это синтаксический доступ к getValue() и setValue() к viewModel.todos.collectAsState()
     LazyColumn(
         contentPadding = PaddingValues(
             top = 40.dp, start = 0.dp,
