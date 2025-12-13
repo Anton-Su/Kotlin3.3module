@@ -1,6 +1,6 @@
 package com.example.kotlin33.data.repository
 
-import com.example.kotlin33.data.model.TodoJsonDataSource
+import com.example.kotlin33.data.local.TodoJsonDataSource
 import com.example.kotlin33.domain.model.TodoItem
 import com.example.kotlin33.domain.repository.TodoRepository
 
@@ -14,10 +14,8 @@ class TodoRepositoryImpl(dataSource: TodoJsonDataSource) : TodoRepository {
 
     override suspend fun toggleTodo(id: Int) {
         val index = todosDto.indexOfFirst { it.id == id }
-        if (index != -1) {
-            val old = todosDto[index]
-            val updated = old.copy(isCompleted = !old.isCompleted)
-            todosDto[index] = updated
-        }
+        val old = todosDto[index]
+        val updated = old.copy(isCompleted = !old.isCompleted)
+        todosDto[index] = updated
     }
 }

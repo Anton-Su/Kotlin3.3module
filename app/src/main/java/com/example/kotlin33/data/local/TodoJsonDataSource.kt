@@ -1,6 +1,7 @@
-package com.example.kotlin33.data.model
+package com.example.kotlin33.data.local
 
 import android.content.Context
+import com.example.kotlin33.data.model.TodoItemDto
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
