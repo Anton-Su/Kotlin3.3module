@@ -31,7 +31,8 @@ fun Navigation(navController: NavHostController = rememberNavController(), viewM
             arguments = listOf(navArgument("itemId") { type = NavType.IntType })
         ) { backStackEntry ->
             val itemId = backStackEntry.arguments?.getInt("itemId")
-            val item = viewModel.todos.value.find { it.id == itemId }
+            // Find the item in the ViewModel's list (collectAsState() сомнительно, но по-другому не достать)
+            val item = viewModel.todos.collectAsState().value.find { it.id == itemId }
             if (item != null) {
                 DetailScreen(navHostController = navController, item = item)
             }
