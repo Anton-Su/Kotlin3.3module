@@ -1,7 +1,9 @@
 package com.example.kotlin33.presentation.viewModel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.kotlin33.data.local.TodoJsonDataSource
 import com.example.kotlin33.data.repository.TodoRepositoryImpl
@@ -12,11 +14,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class TodoViewModel(application: Application): AndroidViewModel(application) {
-    private val dataSource = TodoJsonDataSource(getApplication())
-    private val repository = TodoRepositoryImpl(dataSource)
-    private val getAllTodosUseCase = GetAllTodosUseCase(repository)
-    private val toggleToDoUseCase = GetTodoUseCase(repository)
+class TodoViewModel(private val getAllTodosUseCase: GetAllTodosUseCase,
+                    private val toggleToDoUseCase: GetTodoUseCase): ViewModel() {
     private val _todos = MutableStateFlow<List<TodoItem>>(emptyList())
     val todos = _todos.asStateFlow()
 
@@ -30,7 +29,7 @@ class TodoViewModel(application: Application): AndroidViewModel(application) {
         }
     }
 
-    fun toggleToDo(id: Int) { // Функция переключения чекбокса
+    fun toggleToDo(id: Int) {
         viewModelScope.launch {
             toggleToDoUseCase(id)
             _todos.value = getAllTodosUseCase()
