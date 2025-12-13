@@ -3,6 +3,7 @@ package com.example.kotlin33
 import com.example.kotlin33.domain.model.TodoItem
 import com.example.kotlin33.domain.repository.TodoRepository
 import com.example.kotlin33.domain.usecase.GetAllTodosUseCase
+import com.example.kotlin33.domain.usecase.GetTodoUseCase
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
@@ -18,7 +19,7 @@ class FakeTodoRepository : TodoRepository {
 
     override suspend fun getTodos(): List<TodoItem> = todos
 
-    override suspend fun toggleTodo(id: Int): Unit {
+    override suspend fun toggleTodo(id: Int) {
         val index = todos.indexOfFirst { it.id == id }
         if (index != -1) {
             val todo = todos[index]
@@ -31,6 +32,7 @@ class FakeTodoRepository : TodoRepository {
 
 class GetTodosUseCaseTest {
     private lateinit var getTodosUseCase: GetAllTodosUseCase
+    private lateinit var toggleToDoUseCase: GetTodoUseCase
     private lateinit var repository: TodoRepository
     private val testDispatcher = StandardTestDispatcher()
 
@@ -38,6 +40,7 @@ class GetTodosUseCaseTest {
     fun setup() {
         repository = FakeTodoRepository()
         getTodosUseCase = GetAllTodosUseCase(repository)
+        toggleToDoUseCase = GetTodoUseCase(repository)
     }
 
     @Test
@@ -50,7 +53,7 @@ class GetTodosUseCaseTest {
     fun `toggleTodo changes isCompleted`() = runTest(testDispatcher) {
         val todoBefore = repository.getTodos().first { it.id == 1 }
         assertEquals(false, todoBefore.isCompleted)
-        repository.toggleTodo(1)
+        toggleToDoUseCase(1)
         val todoAfter = repository.getTodos().first { it.id == 1 }
         assertEquals(true, todoAfter.isCompleted)
     }
