@@ -40,7 +40,6 @@ class NavigationTests {
         composeTestRule.onAllNodesWithTag("card_checkbox")[0].performClick()
         composeTestRule.onAllNodesWithTag("card_checkbox")[0].assertIsOff()
         //composeTestRule.onAllNodesWithTag("card_checkbox")[0].assertIsOn()
-        //card_checkbox
     }
 
     @Test
@@ -55,7 +54,6 @@ class NavigationTests {
         composeTestRule.onNodeWithText("Grocery shopping").assertIsDisplayed()
         //composeTestRule.onNodeWithText("а3 к23к2к32к2к").assertDoesNotExist()
     }
-
 }
 
 

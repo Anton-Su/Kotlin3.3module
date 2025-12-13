@@ -18,15 +18,13 @@ class FakeTodoRepository : TodoRepository {
 
     override suspend fun getTodos(): List<TodoItem> = todos
 
-    override suspend fun toggleTodo(id: Int): TodoItem? {
+    override suspend fun toggleTodo(id: Int): Unit {
         val index = todos.indexOfFirst { it.id == id }
         if (index != -1) {
             val todo = todos[index]
             val updated = todo.copy(isCompleted = !todo.isCompleted)
             todos[index] = updated
-            return updated
         }
-        return null
     }
 }
 
@@ -47,8 +45,6 @@ class GetTodosUseCaseTest {
         val todos = getTodosUseCase()
         assertEquals(3, todos.size)
     }
-
-
 
     @Test
     fun `toggleTodo changes isCompleted`() = runTest(testDispatcher) {
