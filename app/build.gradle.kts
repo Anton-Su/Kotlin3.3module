@@ -48,7 +48,7 @@ dependencies {
     androidTestImplementation(libs.ui.test.junit4)
     debugImplementation(libs.ui.test.manifest)
 
-    
+
     implementation(libs.gson)
 
     implementation (libs.androidx.lifecycle.viewmodel.ktx)

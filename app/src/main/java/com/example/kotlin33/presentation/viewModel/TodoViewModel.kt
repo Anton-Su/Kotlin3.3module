@@ -32,10 +32,7 @@ class TodoViewModel(private val getAllTodosUseCase: GetAllTodosUseCase,
     fun toggleToDo(id: Int) {
         viewModelScope.launch {
             toggleToDoUseCase(id)
-            _todos.value = getAllTodosUseCase()
         }
-
     }
-
 }
 
