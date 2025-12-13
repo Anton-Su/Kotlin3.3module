@@ -4,7 +4,7 @@ import com.example.kotlin33.domain.model.TodoItem
 import com.example.kotlin33.domain.repository.TodoRepository
 
 class GetTodoUseCase(private val repository: TodoRepository) {
-    suspend operator fun invoke(id: Int): TodoItem? {
+    suspend operator fun invoke(id: Int) {
         return repository.toggleTodo(id)
     }
 }

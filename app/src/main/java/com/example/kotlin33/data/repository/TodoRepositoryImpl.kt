@@ -12,14 +12,12 @@ class TodoRepositoryImpl(dataSource: TodoJsonDataSource) : TodoRepository {
         return todosDto.map { it.toDomain() }
     }
 
-    override suspend fun toggleTodo(id: Int): TodoItem? {
+    override suspend fun toggleTodo(id: Int) {
         val index = todosDto.indexOfFirst { it.id == id }
         if (index != -1) {
             val old = todosDto[index]
             val updated = old.copy(isCompleted = !old.isCompleted)
             todosDto[index] = updated
-            return updated.toDomain()
         }
-        return null
     }
 }
